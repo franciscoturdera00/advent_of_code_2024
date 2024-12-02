@@ -40,6 +40,3 @@ with open(text_file) as f:
         
 
 print(safe_count)
-
-# Low: 638
-# High: 644
