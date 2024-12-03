@@ -1,6 +1,5 @@
 text_file = "input_part_1"
 # text_file = "easy_input"
-safe_count = 0
 
 
 def safety_check(numbers, retry=False):
@@ -14,12 +13,14 @@ def safety_check(numbers, retry=False):
         if increasing:
             if current_value - previous_value > 3 or current_value - previous_value <= 0:
                 if not retry and n < len(numbers):
+                    # If failed, try again with one less element
                     return any(safety_check(numbers[:n - x] + numbers[n - x + 1:], True) for x in range(0,len(numbers)))
                 safe = False
                 break
-        else:
+        elif not increasing:
             if previous_value - current_value > 3 or previous_value - current_value <= 0:
                 if not retry and n < len(numbers):
+                    # If failed, try again with one less element
                     return any(safety_check(numbers[:n - x] + numbers[n - x + 1:], True) for x in range(0,len(numbers)))
                 safe = False
                 break
@@ -29,6 +30,7 @@ def safety_check(numbers, retry=False):
 
 with open(text_file) as f:
     lines = f.readlines()
+    safe_count = 0
     for line in lines:
         numbers = line.split(" ")
         if len(numbers) <= 1:

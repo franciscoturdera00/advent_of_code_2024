@@ -6,11 +6,12 @@ text_file = "Day 3\\part_1.txt"
  
 
 def find_all_operations(input):
+    # Reg exp: Takes any "don't(), do(), mult(number(max 3 digits), number(max 3 digits))"
     regular_exp=r"don't\(\)|do\(\)|mul\(\d{1,3},\d{1,3}\)"
     return re.findall(regular_exp, input)
 
 def perform_multiplication(mult_instance):
-    regular_exp = r"\d{1,3}"
+    regular_exp = r"\d{1,3}" # number of 1 - 3 digits
     numbers = re.findall(regular_exp, mult_instance)
     total = 1
     for n in numbers:

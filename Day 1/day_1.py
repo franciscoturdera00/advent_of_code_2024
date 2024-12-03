@@ -9,6 +9,7 @@ def get_sorted_lists(lines):
     list_2 = list()
     for line in lines:
         a, _, _, b = line.split(" ")
+        # inserts new element sorted
         bisect.insort_left(list_1, a)
         bisect.insort_left(list_2, b)
     return list_1, list_2
