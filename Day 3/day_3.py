@@ -5,7 +5,7 @@ text_file = "Day 3\\part_1.txt"
 # text_file = "Day 3\\test_2.txt"
  
 
-def find_all_mul_operation(input):
+def find_all_operations(input):
     regular_exp=r"don't\(\)|do\(\)|mul\(\d{1,3},\d{1,3}\)"
     return re.findall(regular_exp, input)
 
@@ -40,6 +40,6 @@ def validate_input(operations):
 
 with open(text_file) as f:
     program = str(f.readlines())
-    all_mults = find_all_mul_operation(program)
+    all_mults = find_all_operations(program)
     cleaned_mults = validate_input(all_mults)
     print(add_all_mults(cleaned_mults))
