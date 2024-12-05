@@ -38,15 +38,15 @@ def sum_valid_updates(updates, ordering_rules):
     return total
 
 def validate_update(update, ordering_rules):
-    new_update = [update[0]]
+    valid_update = [update[0]]
     for value in update[1:]:
-        index = len(new_update)
-        for ordered in new_update[::-1]:
+        index = len(valid_update)
+        for ordered in valid_update[::-1]:
             if value in ordering_rules.get(ordered, list()):
                 index -= 1
-        new_update.insert(index, value)
-    return new_update
-
-        
+            else:
+                break
+        valid_update.insert(index, value)
+    return valid_update
 
 print(main())
