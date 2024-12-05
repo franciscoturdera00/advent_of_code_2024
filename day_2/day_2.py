@@ -1,4 +1,4 @@
-text_file = "Day 2\\input_part_1"
+text_file = "day_2/input_part_1"
 # text_file = "easy_input"
 
 

@@ -1,6 +1,6 @@
 import re
 
-text_file = "Day 3\\part_1.txt"
+text_file = "day_3/part_1.txt"
 # text_file = "Day 3\\test_input.txt"
 # text_file = "Day 3\\test_2.txt"
  

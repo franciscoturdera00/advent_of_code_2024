@@ -1,7 +1,7 @@
 from enum import Enum
 
 # text_file = "Day 4\\example_1.txt"
-text_file = "Day 4\\part_1.txt"
+text_file = "day_4/part_1.txt"
 TARGET = "MAS"
 
 def main():
