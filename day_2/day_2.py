@@ -5,7 +5,7 @@ text_file = "day_2/input_part_1"
 def check_values_validity(index, lesser_value, greater_value, retry=True):
     if greater_value - lesser_value > 3 or greater_value - lesser_value <= 0:
         if retry:
-            # If failed, try again with one less element
+            # Try once again with one less element
             return any(safety_check(numbers[:index - x] + numbers[index - x + 1:], False) for x in range(index + 1))
         return False
     return True
