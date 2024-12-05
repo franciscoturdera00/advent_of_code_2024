@@ -18,3 +18,7 @@ Advent of Code 2024 - Personal Submissions
 [Solution Part 1](day_4/day_4_part_1.py) <br/>
 [Solution Part 2](day_4/day_4_part_2.py)
 
+### Day 5
+[Problem](day_5/problem) <br/>
+[Solution](day_5/day_5.py)
+
