@@ -1,8 +1,8 @@
 import bisect
 import functools
 
-# text_file = "Day 1\\test_input"
-text_file = "Day 1\\part_1"
+# text_file = "day_1\\test_input"
+text_file = "day_1\\part_1"
 
 def get_sorted_lists(lines):
     list_1 = list()
