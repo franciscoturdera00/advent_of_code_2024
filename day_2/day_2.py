@@ -1,8 +1,16 @@
 text_file = "day_2/input_part_1"
-# text_file = "easy_input"
+# text_file = "day_2/easy_input"
 
 
-def safety_check(numbers, retry=False):
+def check_values_validity(index, lesser_value, greater_value, retry=True):
+    if greater_value - lesser_value > 3 or greater_value - lesser_value <= 0:
+        if retry:
+            # If failed, try again with one less element
+            return any(safety_check(numbers[:index - x] + numbers[index - x + 1:], False) for x in range(index + 1))
+        return False
+    return True
+
+def safety_check(numbers, retry=True):
     previous_value = int(numbers[0])
     increasing = True
     if previous_value >= int(numbers[1]):
@@ -11,19 +19,11 @@ def safety_check(numbers, retry=False):
     for n in range(1, len(numbers)):
         current_value = int(numbers[n])
         if increasing:
-            if current_value - previous_value > 3 or current_value - previous_value <= 0:
-                if not retry and n < len(numbers):
-                    # If failed, try again with one less element
-                    return any(safety_check(numbers[:n - x] + numbers[n - x + 1:], True) for x in range(0,len(numbers)))
-                safe = False
-                break
+            safe = check_values_validity(n, previous_value, current_value, retry)
         elif not increasing:
-            if previous_value - current_value > 3 or previous_value - current_value <= 0:
-                if not retry and n < len(numbers):
-                    # If failed, try again with one less element
-                    return any(safety_check(numbers[:n - x] + numbers[n - x + 1:], True) for x in range(0,len(numbers)))
-                safe = False
-                break
+            safe = check_values_validity(n, current_value, previous_value, retry)
+        if not safe:
+            break
         previous_value = current_value
     return safe
 
