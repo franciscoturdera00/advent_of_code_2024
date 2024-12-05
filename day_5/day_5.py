@@ -30,10 +30,10 @@ def sum_valid_updates(updates, ordering_rules):
     total = 0
     for update in updates:
         if update_is_valid(update, ordering_rules):
-            # total += update[int(len(update) /2)]
+            # total += update[int(len(update) /2)] # Part 1
             continue
         else:
-            valid_update = validate_update(update, ordering_rules)
+            valid_update = validate_update(update, ordering_rules) # part 2
             total += valid_update[int(len(update) /2)]
     return total
 
