@@ -12,7 +12,7 @@ def main():
         return sum_valid_updates(update_lists, order_dict)
 
 
-def build_ordering_dictionary(orderings):
+def build_ordering_dictionary(orderings): # {3: [5,4,6], 5: {9,3,94}}
     ordering_dict = {}
     for ordering in orderings:
         before, after = list(map(int, ordering.split("|")))
@@ -20,9 +20,9 @@ def build_ordering_dictionary(orderings):
     return ordering_dict
 
 def update_is_valid(update, ordering_rules):
-    for i, up in enumerate(update):
-        for must_be_before in update[i + 1:]:
-            if must_be_before in ordering_rules.get(up, list()):
+    for i, page_number in enumerate(update):
+        for must_be_after in update[i + 1:]:
+            if must_be_after in ordering_rules.get(page_number, list()):
                 return False
     return True
 
