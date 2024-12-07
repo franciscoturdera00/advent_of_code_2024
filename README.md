@@ -22,3 +22,7 @@ Advent of Code 2024 - Personal Submissions
 [Problem](day_5/problem) <br/>
 [Solution](day_5/day_5.py)
 
+### Day 6 (Part 2 incomplete)
+[Problem](day_6/problem) <br/>
+[Solution](day_6/day_6.py)
+
