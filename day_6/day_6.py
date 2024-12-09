@@ -29,9 +29,11 @@ def main():
         next_grid = grid
         tick = 0
         while cont:
+            # print_nice_grid(next_grid)
+            # time.sleep(0.7)
             next_grid, cont, guard_position, guard_direction = take_next_step(next_grid, guard_position, guard_direction, tick)
             tick += 1
-            
+        print_nice_grid(next_grid)
         unsafe = count_unsafe(grid) # part 1
         return unsafe
         return count_loop_possibilities(next_grid, starting_guard_position, starting_guard_direction) # part 2
@@ -44,23 +46,47 @@ def count_loop_possibilities(complete_path_grid: Dict[int,List[Space]], guard_po
     tick = 0
     cont = True
     print_it = False
+    simulate = False
     complete_path_grid[guard_position[1]][guard_position[0]].become_guard(guard_direction.directional_symbol)
     while cont:
         if tick == 1021:
             print_it = True
-        if print_it:
-            print_nice_grid(complete_path_grid)
-            print(guard_position, tick, loops)
 
         complete_path_grid, cont, guard_position, guard_direction = take_next_step(complete_path_grid, guard_position, guard_direction)
         # print_nice_grid(complete_path_grid)
         tick += 1
-        if is_loop_possibility(complete_path_grid, guard_position, guard_direction, tick):
+        if print_it:
+            print_nice_grid(complete_path_grid)
+            print(guard_position, tick, loops)
+            simulate = True
+    
+        if is_loop_possibility(complete_path_grid, guard_position, guard_direction, tick, simulate):
             loops += 1
     return loops
 
+# def simulate_movement(real_grid: Dict[int, List[Space]], guard_position, guard_direction: Direction):
+    made_up_grid: Dict[int, List[Space]] = dict()
+    for i, _ in enumerate(real_grid):
+        made_up_grid[i] = [Space(".")] * len(real_grid[i])
+    made_up_grid[guard_position[1]][guard_position[0]] = Space(guard_direction.directional_symbol)
+    while point_in_bounds(made_up_grid, guard_position):
+        print_nice_grid(made_up_grid)
+        time.sleep(0.1)
+        forward = get_next_location(guard_direction.cardinal_direction, guard_position)
+        if real_grid[forward[1]][forward[0]].is_obstruction():
+            # go right
+            new_dir = rotate_90_deg(guard_direction).cardinal_direction
+            right = get_next_location(new_dir, guard_position)
+            made_up_grid[right[1]][right[0]].become_guard(new_dir)
+            guard_position = right
+            guard_direction = new_dir
+        else:
+            made_up_grid[forward[1]][forward[0]].become_guard(guard_direction)
+            guard_position = forward
+        made_up_grid[guard_position[1]][guard_position[0]].become_seen(0, guard_direction)
 
-def is_loop_possibility(complete_path_grid: Dict[int,List[Space]], guard_starting_position, guard_starting_direction: Direction, tick):
+
+def is_loop_possibility(complete_path_grid: Dict[int,List[Space]], guard_starting_position, guard_starting_direction: Direction, tick, simulate=False):
     # Work in progress
     forward_step_position = get_next_location(guard_starting_direction.cardinal_direction, guard_starting_position)
     if not point_in_bounds(complete_path_grid, forward_step_position):
@@ -72,6 +98,9 @@ def is_loop_possibility(complete_path_grid: Dict[int,List[Space]], guard_startin
     quarter_turn_direction = rotate_90_deg(guard_starting_direction)
     right_step_position = get_next_location(quarter_turn_direction.cardinal_direction, guard_starting_position)
     right_step_space = complete_path_grid[right_step_position[1]][right_step_position[0]]
+
+    # if simulate:
+    #     simulate_movement(complete_path_grid, guard_starting_position, quarter_turn_direction)
 
     is_loop = False
     if right_step_space.is_seen():
@@ -164,9 +193,9 @@ def get_guard_direction(symbol):
 
 
 def print_nice_grid(grid, timer=None):
-    for y,_ in enumerate(grid):
-        for x,_ in enumerate(grid[y]):
-            print(grid[y][x], end="")
+    for y, _ in enumerate(grid):
+        for _, space in enumerate(grid[y]):
+            print(space, end="")
             # if timer is not None:
             #     time.sleep(timer)
         print()
