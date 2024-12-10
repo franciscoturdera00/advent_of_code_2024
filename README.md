@@ -34,3 +34,7 @@ Advent of Code 2024 - Personal Submissions
 [Problem](day_8/problem) <br/>
 [Solution](day_8/day_8.py)
 
+### Day 9
+[Problem](day_9/problem) <br/>
+[Solution](day_9/day_9.py)
+
