@@ -23,8 +23,11 @@ def find_all_trailheads(grid, start=0, g=9):
             if num == start:
                 trailhead_count = 0
                 for g in goals:
-                    trails = count_trailhead(grid, (x,y), start - 1, g)
-                    trailhead_count += trails
+                    # trails = count_trailhead(grid, (x,y), start - 1, g) # part 1
+                    # if trails:
+                    #     trailhead_count += 1
+                    trails = count_trailhead(grid, (x,y), start - 1, g) # part 2
+                    trailhead_count += trails # part 2
                     
                 trailhead_counts.append(trailhead_count)
     return trailhead_counts
