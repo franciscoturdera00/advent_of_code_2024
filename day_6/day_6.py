@@ -105,7 +105,7 @@ def is_loop_possibility(complete_path_grid: Dict[int,List[Space]], guard_startin
     is_loop = False
     if right_step_space.is_seen():
         history = right_step_space.get_history()
-        for symbol, seen_tick  in history:
+        for symbol, seen_tick in history:
             is_loop = symbol == quarter_turn_direction.directional_symbol and tick > seen_tick
             if is_loop:
                 break
