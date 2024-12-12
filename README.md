@@ -42,3 +42,7 @@ Advent of Code 2024 - Personal Submissions
 [Problem](day_10/problem) <br/>
 [Solution](day_10/day_10.py)
 
+### Day 11
+[Problem](day_11/problem) <br/>
+[Solution](day_11/day_11.py)
+
