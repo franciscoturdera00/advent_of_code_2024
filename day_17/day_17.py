@@ -12,50 +12,51 @@ text_file = "day_17/input.txt"
 def main():
     output = Output()
     program = read_input(text_file)
-    register_a_value = 13560000
-    while program != output.val:
-        program = read_input(text_file)
+    register_a_value = None
+    # while program != output.val:
+    program = read_input(text_file)
 
-        if register_a_value is not None:
-            register_a_value += 1
-            if register_a_value % 10000 == 0:
-                print(register_a_value)
-            REGISTER_A.update_value(register_a_value)
+    if register_a_value is not None:
+        register_a_value += 1
+        if register_a_value % 10000 == 0:
+            print(register_a_value)
+        REGISTER_A.update_value(register_a_value)
 
-        combo_operands = {0: (lambda : 0), 1: (lambda : 1), 2: (lambda : 2), 3: (lambda : 3),
-                        4: (lambda : REGISTER_A.val), 5: (lambda : REGISTER_B.val), 6: (lambda : REGISTER_C.val)}
+    combo_operands = {0: (lambda : 0), 1: (lambda : 1), 2: (lambda : 2), 3: (lambda : 3),
+                    4: (lambda : REGISTER_A.val), 5: (lambda : REGISTER_B.val), 6: (lambda : REGISTER_C.val)}
 
-        instruction_pointer = 0
+    instruction_pointer = 0
 
-        output = Output()
+    output = Output()
 
-        while instruction_pointer < len(program):
-            if program[instruction_pointer] == 0:
-                instruction_pointer = adv(program[instruction_pointer + 1], combo_operands, instruction_pointer)
-                continue
-            if program[instruction_pointer] == 1:
-                instruction_pointer = bxl(program[instruction_pointer + 1], instruction_pointer)
-                continue
-            if program[instruction_pointer] == 2:
-                instruction_pointer = bst(program[instruction_pointer + 1], combo_operands, instruction_pointer)
-                continue
-            if program[instruction_pointer] == 3:
-                instruction_pointer = jnz(program[instruction_pointer + 1], instruction_pointer)
-                continue
-            if program[instruction_pointer] == 4:
-                instruction_pointer = bxc(instruction_pointer)
-                continue
-            if program[instruction_pointer] == 5:
-                instruction_pointer = out(program[instruction_pointer + 1], combo_operands, output, instruction_pointer)
-                continue
-            if program[instruction_pointer] == 6:
-                instruction_pointer = bdv(program[instruction_pointer + 1], combo_operands, instruction_pointer)
-                continue
-            if program[instruction_pointer] == 7:
-                instruction_pointer = cdv(program[instruction_pointer + 1], combo_operands, instruction_pointer)
-                continue
-    print(register_a_value)
-    return register_a_value
+    while instruction_pointer < len(program):
+        if program[instruction_pointer] == 0:
+            instruction_pointer = adv(program[instruction_pointer + 1], combo_operands, instruction_pointer)
+            continue
+        if program[instruction_pointer] == 1:
+            instruction_pointer = bxl(program[instruction_pointer + 1], instruction_pointer)
+            continue
+        if program[instruction_pointer] == 2:
+            instruction_pointer = bst(program[instruction_pointer + 1], combo_operands, instruction_pointer)
+            continue
+        if program[instruction_pointer] == 3:
+            instruction_pointer = jnz(program[instruction_pointer + 1], instruction_pointer)
+            continue
+        if program[instruction_pointer] == 4:
+            instruction_pointer = bxc(instruction_pointer)
+            continue
+        if program[instruction_pointer] == 5:
+            instruction_pointer = out(program[instruction_pointer + 1], combo_operands, output, instruction_pointer)
+            continue
+        if program[instruction_pointer] == 6:
+            instruction_pointer = bdv(program[instruction_pointer + 1], combo_operands, instruction_pointer)
+            continue
+        if program[instruction_pointer] == 7:
+            instruction_pointer = cdv(program[instruction_pointer + 1], combo_operands, instruction_pointer)
+            continue
+    # print(register_a_value)
+    # return register_a_value
+    return output.val
 
 def read_input(input_file):
     with open(input_file) as f:
@@ -68,6 +69,6 @@ def read_input(input_file):
         return program
 
 
-# result = "".join(str(main())[1: -1].split())
-# print(result)
-print("A needed: " + str(main()))
+result = "".join(str(main())[1: -1].split())
+print(result)
+# print("A needed: " + str(main()))
