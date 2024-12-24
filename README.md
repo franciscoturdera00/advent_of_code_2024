@@ -62,4 +62,8 @@
 [Problem](day_23/problem) <br/>
 [Solution](day_23/day_23.py)
 
+### Day 24
+[Problem](day_24/problem) <br/>
+[Solution](day_24/day_24.py)
+
 
